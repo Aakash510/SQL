@@ -1,6 +1,9 @@
 CREATE DATABASE dx_pvt;
 USE dx_pvt; 
 
+-- Hello world
+SELECT * FROM orders;
+
 CREATE TABLE orders (
             order_id INT NOT NULL,
             order_no int NOT NULL,
