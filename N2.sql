@@ -1,4 +1,6 @@
 
+USE dx_pvt;
+
 USE dx_pvt; 
 
 SELECT * FROM orders;
