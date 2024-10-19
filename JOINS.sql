@@ -1,5 +1,5 @@
 USE dx_pvt;
-USE dx_pvt;
+
 CREATE TABLE employe (
 			emp_id CHAR(5) NOT NULL,
             emp_nane VARCHAR(20) NOT NULL,
