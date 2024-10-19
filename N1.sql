@@ -2,6 +2,7 @@ CREATE DATABASE dx_pvt;
 USE dx_pvt; 
 
 -- Hello world
+
 SELECT * FROM orders;
 
 
