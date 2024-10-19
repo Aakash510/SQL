@@ -64,6 +64,18 @@ VALUES
 ('P3','PIPELINE','T3'),
 ('P4','COLLECTION', 'T4'),
 ('P5','UPLOADING', 'T5');
+SELECT * FROM project;
+SET SQL_SAFE_UPDATES = 0;
+UPDATE project
+SET team_mem_id = CASE 
+    WHEN project_id = 'P1' THEN 'E1'
+    WHEN project_id = 'P2' THEN 'E2'
+    WHEN project_id = 'P3' THEN 'E3'
+    WHEN project_id = 'P4' THEN 'E4'
+    WHEN project_id = 'P5' THEN 'E5'
+END
+WHERE project_id IN ('P1', 'P2', 'P3', 'P4', 'P5');
+SELECT * FROM project;
 
 -- INNER JOIN/JOINS (FETCH COMMON dept_id VALUES)
 SELECT e.emp_name , d.dep_name
@@ -84,7 +96,9 @@ RIGHT JOIN department AS d
 ON e.dept_id = d.dep_id;
 
 -- Q) fetch the detail of all the employe their manager their department & their project they work on?
-
-SELECT e.emp_name
-FROM employe as e 
+SELECT e.emp_name, d.dep_name, m.man_name, p.project_name
+FROM employe as e
+JOIN department as d on e.dept_id = d.dep_id
+left join manager as m 	on m.dep_id = e.dept_id
+join project AS p on p.team_mem_id = e.emp_id  
 
