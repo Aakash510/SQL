@@ -1,14 +1,13 @@
+CREATE DATABASE dx_pvt;
 USE dx_pvt;
 
 CREATE TABLE employe (
 	      emp_id CHAR(5) NOT NULL,
-            emp_nane VARCHAR(20) NOT NULL,
+            emp_name VARCHAR(20) NOT NULL,
             salary INT NOT NULL,
             dept_id CHAR(5) NOT NULL,
             manager_id CHAR(5) NOT NULL
 );
-ALTER TABLE employe
-RENAME COLUMN emp_nane TO emp_name;
 
 INSERT INTO employe (emp_id,emp_name,salary,dept_id,manager_id)
 VALUES
@@ -19,37 +18,41 @@ VALUES
 ('E5','vyom', 45000, 'D5', 'M5');
 
 CREATE TABLE department (
-			dep_id CHAR(5) NOT NULL,
-            dep_name VARCHAR(20) NOT NULL
+			dept_id CHAR(5) NOT NULL,
+            dept_name VARCHAR(20) NOT NULL
 );
-ALTER TABLE department
-RENAME COLUMN dep_nane TO dep_name;
-select * from department;
-INSERT INTO department (dep_id,dep_name)
+
+INSERT INTO department (dept_id,dept_name)
 VALUES
 ('D1', 'IT'),
 ('D2', 'ME'),
 ('D3', 'CE'),
 ('D4', 'EE'),
 ('D5', 'CSE');
+
 SET SQL_SAFE_UPDATES = 0;   -- SAFE MODE OFF
 DELETE FROM department
-WHERE dep_id = 'D5';
-INSERT INTO department (dep_id,dep_name)
+WHERE dept_id = 'D5';
+select * from department;
+
+INSERT INTO department (dept_id,dept_name)
 VALUES
 ('D5', 'CSE');
+select * from department;
+
 CREATE TABLE manager (
-			man_id CHAR(5) NOT NULL,
-            man_name VARCHAR(20) NOT NULL,
-            dep_id CHAR(5) NOT NULL
+			mang_id CHAR(5) NOT NULL,
+            mang_name VARCHAR(20) NOT NULL,
+            dept_id CHAR(5) NOT NULL
 );
 
-INSERT INTO manager (man_id,man_name,dep_id)
+INSERT INTO manager (mang_id,mang_name,dept_id)
 VALUES
 ('M1','rohan',  'D1'),
 ('M2','aakash', 'D2'),
 ('M3','radhika','D3'),
 ('M4','satyam', 'D4');
+select * from manager;
 
 CREATE TABLE project (
 			project_id CHAR(5) NOT NULL,
@@ -65,7 +68,7 @@ VALUES
 ('P4','COLLECTION', 'T4'),
 ('P5','UPLOADING', 'T5');
 SELECT * FROM project;
-SET SQL_SAFE_UPDATES = 0;
+
 UPDATE project
 SET team_mem_id = CASE 
     WHEN project_id = 'P1' THEN 'E1'
@@ -78,27 +81,28 @@ WHERE project_id IN ('P1', 'P2', 'P3', 'P4', 'P5');
 SELECT * FROM project;
 
 -- INNER JOIN/JOINS (FETCH COMMON dept_id VALUES)
-SELECT e.emp_name , d.dep_name
+SELECT e.emp_name , d.dept_name
 FROM employe as e
 INNER JOIN department as d
-ON e.dept_id = d.dep_id;
+ON e.dept_id = d.dept_id;
 
 -- LEFT JOIN (fetch All employe name & their department name)
-SELECT e.emp_name , d.dep_name 	
+SELECT e.emp_name , d.dept_name 	
 FROM employe AS e
 LEFT JOIN department AS d
-ON e.dept_id = d.dep_id;
+ON e.dept_id = d.dept_id;
 
 -- RIGHT JOIN (fetch employe name & ALL department name)
-SELECT emp_id, dep_name 	
+SELECT emp_id, dept_name 	
 FROM employe AS e
 RIGHT JOIN department AS d
-ON e.dept_id = d.dep_id;
+ON e.dept_id = d.dept_id;
 
 -- Q) fetch the detail of all the employe their manager their department & their project they work on?
-SELECT e.emp_name, d.dep_name, m.man_name, p.project_name
+SELECT e.emp_name, d.dept_name, m.mang_name, p.project_name
 FROM employe as e
-JOIN department as d on e.dept_id = d.dep_id
-left join manager as m 	on m.dep_id = e.dept_id
+JOIN department as d on e.dept_id = d.dept_id
+left join manager as m 	on m.dept_id = e.dept_id
 join project AS p on p.team_mem_id = e.emp_id  
 
+-- full join ( inner join + all remaining record from left & right table both)
