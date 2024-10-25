@@ -5,6 +5,7 @@ This project showcases -
 1. Normalization up to 3rd normal form (3NF) in sql.
 
 2. Sql Commands 
+
                 DDL - Create, ALTER, RENAME, USE, TRUNCATE, DROP
                 DML - INSERT, UPDATE, DELETE.
                 DQL - Different types of SELECT.
