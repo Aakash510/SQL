@@ -4,13 +4,15 @@ This project showcases -
 
 1. Normalization up to 3rd normal form (3NF) in sql.
 
-2. Sql Commands 
+2. An Entity Relationsip (ER) Diagram
+
+3. Sql Commands 
 
                 DDL - Create, ALTER, RENAME, USE, TRUNCATE, DROP
                 DML - INSERT, UPDATE, DELETE.
                 DQL - Different types of SELECT.
 
-3. Joins Operations 
+4. Joins Operations 
                 
                 INNER JOIN / JOIN
                 LEFT JOIN  /  LEFT OUTER JOIN
@@ -22,7 +24,7 @@ This project showcases -
                 NATURAL JOIN
                 SELF JOIN
 
-4. Sub_Query  
+5. Sub_Query  
 
             Scalar Subquery
             Multiple Row Subquery 
