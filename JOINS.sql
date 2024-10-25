@@ -100,33 +100,48 @@ SELECT * From family;
 
 
 -- INNER JOIN/JOINS (FETCH COMMON dept_id VALUES)
+
+SELECT * FROM employe;
+SELECT * FROM department;
+
 SELECT e.emp_name , d.dept_name
 FROM employe as e
 INNER JOIN department as d
 ON e.dept_id = d.dept_id;
 
 -- LEFT JOIN (fetch All employe name & their department name)
+SELECT * FROM employe;
+SELECT * FROM department;
+
 SELECT e.emp_name , d.dept_name 	
 FROM employe AS e
 LEFT JOIN department AS d
 ON e.dept_id = d.dept_id;
 
 -- RIGHT JOIN (fetch employe name & ALL department name)
+SELECT * FROM employe;
+SELECT * FROM department;
+
 SELECT emp_id, dept_name 	
 FROM employe AS e
 RIGHT JOIN department AS d
 ON e.dept_id = d.dept_id;
 
 -- Q) fetch the detail of all the employe their manager their department & their project they work on?
+
+SELECT * FROM employe;
+SELECT * FROM department;
+SELECT * FROM project;
+
 SELECT e.emp_name, d.dept_name, m.mang_name, p.project_name
 FROM employe as e
 JOIN department as d on e.dept_id = d.dept_id
 left join manager as m 	on m.dept_id = e.dept_id
 join project AS p on p.team_mem_id = e.emp_id;  
 
--- full join ( inner join + all remaining record from left & right table both)
---  In mysql full join systax doesn't exist,
---  we use union keyword to with left & right join together to make full join
+/*	- full join ( inner join + all remaining record from left & right table both)
+	- In mysql full join systax doesn't exist,
+	  we use union keyword to with left & right join together to make full join */
 SELECT e.emp_name, e.salary, m.dept_id,mang_name
 FROM employe as e
 left join manager as m
@@ -137,18 +152,59 @@ FROM employe as e
 right join manager as m
 ON e.manager_id = m.mang_id;
 
--- cross join it will return cartesian product
--- no need to give on condition
--- it will fetch all correspondes column record from left to right table one by one
--- [it is used in case when onother table dosn't contain matching column
--- or tabels unable to join but still need to join]
+/*	- LEFT EXCLUSIVE join
+	- fetch detils of left table except  right table & common_column details */
+SELECT * FROM employe;
+SELECT * FROM manager;
+
+SELECT e.emp_name, e.salary, e.dept_id
+FROM employe as e
+LEFT JOIN  manager as m
+on e.dept_id = m.dept_id
+WHERE m.dept_id IS NULL;
+
+
+/*	- RIGHT EXCLUSIVE join 
+	- It will fetch details of right most table except left tables & common_column detais */
+SELECT * FROM project;
+SET SQL_SAFE_UPDATES = 0;
+INSERT INTO project (project_id,project_name,team_mem_id)
+VALUES
+('P6','ELT',  'E6'),
+('P7','DATA_W', 'E7'),
+('P8','PIPELINE','E8');
+
+SELECT * FROM project;
+SELECT * FROM employe;
+
+SELECT e.emp_name, e.dept_id, p.project_name
+FROM employe as e
+RIGHT JOIN  project as p
+on e.emp_id = p.team_mem_id
+WHERE e.emp_id IS NULL;
+
+DELETE FROM project   -- Undo modification
+WHERE team_mem_id IN ('E6','E7','E8','E9');
+SELECT * FROM project;
+
+/* - CROSS join it will return cartesian product.
+   - no need to give on condition.
+   - it will fetch all correspondes column record from left to right table one by one.
+   - it is used in case when onother table dosn't contain matching column
+     or tabels unable to join but still need to join] */
+SELECT * FROM employe;
+SELECT * FROM department;
+
 SELECT emp_name, dept_name
 FROM employe as e
 cross join department as d;
 
--- Natural join, joins tables automatically by SQL after find  matched column_name in both tables
--- no need to give ON matching condition
--- if unable to find matched condition it will join tables as CROSS JOIN and give cartician product
+/*  - Natural join, joins tables automatically by SQL after find  matched column_name in both tables.
+	- no need to give ON matching condition.
+	- if unable to find matched condition it will join tables as CROSS JOIN and give cartician product. */
+SELECT * FROM employe;
+SELECT * FROM department;
+
 SELECT emp_name,salary
 FROM employe
 NATURAL JOIN department;
@@ -161,9 +217,9 @@ ALTER TABLE department      -- Undo modification
 RENAME COLUMN id to dept_id;
 SELECT * FROM department;
 
--- SELF join, is used when have to fetch detail form same table
--- have to fetch details by two column condition from same table
--- can aslo use as left,right join.
+/*  - SELF join, is used when have to fetch detail form same table
+    - have to fetch details by two column condition from same table
+    - can aslo use as left,right join. */
 SELECT * FROM family;
 
 SELECT c.member_name as Child_Name, 
@@ -178,9 +234,3 @@ FROM family as c
 LEFT JOIN family as p
 on c.member_id = p.parent_id;
 		
-SELECT * FROM employe;
-SELECT * FROM department;
-SELECT * FROM manager;
-SELECT * FROM project;
-SELECT * FROM family;
-
