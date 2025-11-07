@@ -12,5 +12,4 @@ This project showcases  the Basics of DBMS concept and SQL commands-
 ### Minor Project 2:
 
 This project involves -
-"Analyse the market trends of the Used Car Market from multiple geographies"
-
+"Analyse and inspect market behaviours of the Used car Market from multiple geographies. " 
