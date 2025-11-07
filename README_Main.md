@@ -14,7 +14,7 @@
 ## Minor Project 2:
 
 **This project involves -**
-"Analyse the market trends of the Used Car Market from multiple geographies"
+"Analyse and inspect market behaviours of the Used car Market from multiple geographies. "
 
 Actions:
 **Use SQL commands to explore dataset and identify insights about many aspects.**
