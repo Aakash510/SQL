@@ -1,12 +1,13 @@
-# SQL
+
+
+Minor Project 1: 
 
 This project showcases -
-
 1. Normalization up to 3rd normal form (3NF) in sql.
 
-2. An Entity Relationsip (ER) Diagram
+2. An Entity Relationship (ER) Diagram
 
-3. Sql Commands 
+3. SQL Commands 
 
                 DDL - Create, ALTER, RENAME, USE, TRUNCATE, DROP
                 DML - INSERT, UPDATE, DELETE.
